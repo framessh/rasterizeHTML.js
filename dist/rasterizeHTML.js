@@ -429,6 +429,8 @@ var browser = (function (util, proxies, sanedomparsererror, theWindow) {
         element.style.position = "absolute";
         element.style.top = -10000 - height + "px";
         element.style.left = -10000 - width + "px";
+        element.sandbox =
+            "allow-same-origin allow-scripts allow-popups allow-forms";
 
         // We need to add the element to the document so that its content gets loaded
         doc.getElementsByTagName("body")[0].appendChild(element);
@@ -453,8 +455,6 @@ var browser = (function (util, proxies, sanedomparsererror, theWindow) {
                 options.width,
                 options.height
             );
-            iframe.sandbox =
-                "allow-same-origin allow-scripts allow-popups allow-forms";
             var html = element.outerHTML,
                 iframeErrorsMessages = [],
                 executeJsTimeout = options.executeJsTimeout || 0;
