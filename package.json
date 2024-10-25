@@ -22,7 +22,7 @@
   "types": "dist/rasterizeHTML.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cburgmer/rasterizeHTML.js.git"
+    "url": "git://github.com/framessh/rasterizeHTML.js.git"
   },
   "dependencies": {
     "inlineresources": "^1.0.1",
