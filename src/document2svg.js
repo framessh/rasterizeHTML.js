@@ -79,8 +79,6 @@ var document2svg = (function (util, browser, documentHelper, xmlserializer) {
     var convertElementToSvg = function (element, size, zoomFactor) {
         var xhtml = xmlserializer.serializeToString(element);
 
-        browser.validateXHTML(xhtml);
-
         var foreignObjectAttrs = foreignObjectAttributes(size);
         workAroundCollapsingMarginsAcrossSVGElementInWebKitLike(
             foreignObjectAttrs
