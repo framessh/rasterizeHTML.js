@@ -12,6 +12,7 @@ var browser = (function (util, proxies, sanedomparsererror, theWindow) {
         element.style.position = "absolute";
         element.style.top = -10000 - height + "px";
         element.style.left = -10000 - width + "px";
+
         // We need to add the element to the document so that its content gets loaded
         doc.getElementsByTagName("body")[0].appendChild(element);
         return element;
@@ -30,12 +31,14 @@ var browser = (function (util, proxies, sanedomparsererror, theWindow) {
     module.executeJavascript = function (element, options) {
         return new Promise(function (resolve) {
             var iframe = createHiddenElement(
-                    theWindow.document,
-                    "iframe",
-                    options.width,
-                    options.height
-                ),
-                html = element.outerHTML,
+                theWindow.document,
+                "iframe",
+                options.width,
+                options.height
+            );
+            iframe.sandbox =
+                "allow-same-origin allow-scripts allow-popups allow-forms";
+            var html = element.outerHTML,
                 iframeErrorsMessages = [],
                 executeJsTimeout = options.executeJsTimeout || 0;
 
@@ -95,7 +98,8 @@ var browser = (function (util, proxies, sanedomparsererror, theWindow) {
         // make sure content gets exact width independent of box-sizing value
         iframe.style.borderWidth = 0;
         // Don't execute JS, all we need from sandboxing is access to the iframe's document
-        iframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-forms";
+        iframe.sandbox =
+            "allow-same-origin allow-scripts allow-popups allow-forms";
         // Don't include a scrollbar on Linux
         iframe.scrolling = "no";
         return iframe;
